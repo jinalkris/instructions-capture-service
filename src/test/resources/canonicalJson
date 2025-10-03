@@ -1,0 +1,8 @@
+{
+"id": "ACCT123",
+"account_number" : "acct1234",
+"security_id" : "abc123",
+"trade_type":"B",
+"amount":10000,
+"timestamp":"2025-10-02T00:00:00z"
+}

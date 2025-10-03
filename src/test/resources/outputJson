@@ -1,0 +1,10 @@
+{
+"platfor_id": "ACCT123",
+"trade": {
+    "account" : "acct1234",
+    "security" : "abc123",
+    "type":"B",
+    "amount":10000,
+    "timestamp":"2025-10-02T00:00:00z"
+    }
+}
