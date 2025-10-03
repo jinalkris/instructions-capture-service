@@ -8,6 +8,6 @@ public record InputTrade(String platformid, String acctnumber,
 
     @Override
     public String toString() {
-        return String.format("%s %s %s", platformid, type, amount, time);
+        return String.format("%s %s %s %s", platformid, type, amount, time);
     }
 }

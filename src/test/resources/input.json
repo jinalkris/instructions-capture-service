@@ -1,0 +1,8 @@
+{
+  "platformid": "ACCT123",
+  "acctnumber" : "acct1234",
+  "secid" : "abc123",
+  "type":"Buy",
+  "amount":10000,
+  "time":"2025-10-02T00:00:00z"
+}
