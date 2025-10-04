@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/instructions")
 public class TradeController {
 
     private final KafkaListenerService  kafkaListenerService;
@@ -20,9 +21,14 @@ public class TradeController {
         this.producer = producer;
     }
 
-    @PostMapping("/process-messages")
+    @GetMapping("/process-messages")
     public String processAndPublish() {
         Map<String, CanonicalTrade> canonicalTradeMap = kafkaListenerService.getMessages();
+
+        if(!canonicalTradeMap.isEmpty()) {
+            System.out.println("No message available in Kafka.");
+            return "No message available in Kafka.";
+        }
 
         canonicalTradeMap.values().forEach(canonicalTrade -> {
             PlatformTrade platformTrade = TradeTransformer.toPlatformTrade(canonicalTrade);

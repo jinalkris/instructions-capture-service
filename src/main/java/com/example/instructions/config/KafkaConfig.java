@@ -20,6 +20,8 @@ import java.util.Map;
 @Configuration
 public class KafkaConfig {
 
+    private final String localServer = "localhost:9092";
+
     @Bean
     public ConsumerFactory<String, PlatformTrade> consumerFactory()
     {
@@ -27,20 +29,13 @@ public class KafkaConfig {
         Map<String, Object> config = new HashMap<>();
 
         // Adding the Configuration
-        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,
-                "localhost:9092");
-        config.put(ConsumerConfig.GROUP_ID_CONFIG,
-                "group_id");
-        config.put(
-                ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
-                StringDeserializer.class);
-        config.put(
-                ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,
-                JsonDeserializer.class);
+        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, localServer);
+        config.put(ConsumerConfig.GROUP_ID_CONFIG, "group_id");
+        config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
 
         // Returning message in JSON format
-        return new DefaultKafkaConsumerFactory<>(
-                config, new StringDeserializer(),
+        return new DefaultKafkaConsumerFactory<>(config, new StringDeserializer(),
                 new JsonDeserializer<>(PlatformTrade.class));
     }
 
@@ -58,7 +53,7 @@ public class KafkaConfig {
     @Bean
     public ProducerFactory<String, PlatformTrade> producerFactory() {
         Map<String, Object> config = new HashMap<>();
-        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, localServer);
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
 
