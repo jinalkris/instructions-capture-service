@@ -1,5 +1,6 @@
 package com.example.instructions.config;
 
+import com.example.instructions.model.InputTrade;
 import com.example.instructions.model.PlatformTrade;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -23,7 +24,7 @@ public class KafkaConfig {
     private final String localServer = "localhost:9092";
 
     @Bean
-    public ConsumerFactory<String, PlatformTrade> consumerFactory()
+    public ConsumerFactory<String, InputTrade> consumerFactory()
     {
         // Creating a map of string-object type
         Map<String, Object> config = new HashMap<>();
@@ -36,14 +37,13 @@ public class KafkaConfig {
 
         // Returning message in JSON format
         return new DefaultKafkaConsumerFactory<>(config, new StringDeserializer(),
-                new JsonDeserializer<>(PlatformTrade.class));
+                new JsonDeserializer<>(InputTrade.class));
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, PlatformTrade>
-    tradeListener()
+    public ConcurrentKafkaListenerContainerFactory<String, InputTrade> tradeListener()
     {
-        ConcurrentKafkaListenerContainerFactory<String, PlatformTrade> factory
+        ConcurrentKafkaListenerContainerFactory<String, InputTrade> factory
                 = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
 

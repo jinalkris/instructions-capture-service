@@ -18,8 +18,7 @@ public class KafkaListenerService {
             groupId = "group_id",
             containerFactory = "tradeListener")
 
-    public void
-    consume(InputTrade inputTrade)
+    public void consume(InputTrade inputTrade)
     {
         System.out.println("Received input trade " + inputTrade);
 
